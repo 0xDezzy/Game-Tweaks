@@ -5,20 +5,9 @@ on:
         - '*.*.*'
   workflow_dispatch:
 jobs:
-    build:
+    publish:
         permissions: write-all
         runs-on: ubuntu-latest
-        continue-on-error: true
-
-        strategy:
-          max-parallel: 1
-          fail-fast: false
-          matrix:
-            spriggit:
-              - { input_path: 'xp',       esm_name: 'GameTweaks-XP',      output_path: 'XP'       }
-              - { input_path: 'vendors',  esm_name: 'GameTweaks-Vendors', output_path: 'Vendors'  }
-              - { input_path: 'traits',   esm_name: 'GameTweaks-Traits',  output_path: 'Traits'   }
-              - { input_path: 'misc',     esm_name: 'GameTweaks-Misc',    output_path: 'Misc'     }
 
         steps:
           - name: Checkout
@@ -40,14 +29,20 @@ jobs:
     
           - name: run spriggit
             shell: bash
-            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/${{ matrix.spriggit.input_path }}" --OutputPath "modfiles/esm/${{ matrix.spriggit.output_path }}/${{ matrix.spriggit.esm_name }}.esm" --PackageName Spriggit.Yaml.Starfield
-    
-    publish:
-      needs: build
-      permissions: write-all
-      runs-on: ubuntu-latest
+            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/xp" --OutputPath "modfiles/esm/XP/GameTweaks-XP.esm" --PackageName Spriggit.Yaml.Starfield
 
-      steps: 
+          - name: run spriggit
+            shell: bash
+            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/vendors" --OutputPath "modfiles/esm/Vendors/GameTweaks-Vendors.esm" --PackageName Spriggit.Yaml.Starfield
+
+          - name: run spriggit
+            shell: bash
+            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/traits" --OutputPath "modfiles/esm/Traits/GameTweaks-Traits.esm" --PackageName Spriggit.Yaml.Starfield
+
+          - name: run spriggit
+            shell: bash
+            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/misc" --OutputPath "modfiles/esm/Misc/GameTweaks-Misc.esm" --PackageName Spriggit.Yaml.Starfield
+
           - name: Delete gitkeep
             shell: bash
             run: rm ${{ github.workspace }}/modfiles/esm/.gitkeep
@@ -57,7 +52,7 @@ jobs:
             with:
               files: modfiles/
               dest: GameTweaks-${{ github.ref_name }}.zip
-        
+                  
           - name: Create Release
             id: create_release
             uses: ncipollo/release-action@v1.13.0
