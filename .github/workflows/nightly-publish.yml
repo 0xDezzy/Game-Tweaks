@@ -18,7 +18,7 @@ jobs:
           git log --since="1 days ago" --name-only
           echo "should_run=$(git log --since="1 days ago" --name-only | grep "" -c)" >> "$GITHUB_OUTPUT"
 
-  publish:
+  build:
     needs: check-changes
     if: ${{ needs.check-changes.outputs.should_run >= 1 }}
     permissions: write-all
@@ -58,6 +58,13 @@ jobs:
         shell: bash
         run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/${{ matrix.spriggit.input_path }}" --OutputPath "modfiles/esm/${{ matrix.spriggit.output_path }}/${{ matrix.spriggit.esm_name }}.esm" --PackageName Spriggit.Yaml.Starfield
 
+
+  publish:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    
+    steps:
       - name: Delete gitkeep
         shell: bash
         run: rm ${{ github.workspace }}/modfiles/esm/.gitkeep

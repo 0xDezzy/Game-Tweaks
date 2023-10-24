@@ -5,7 +5,7 @@ on:
         - '*.*.*'
   workflow_dispatch:
 jobs:
-    publish:
+    build:
         permissions: write-all
         runs-on: ubuntu-latest
         continue-on-error: true
@@ -42,6 +42,12 @@ jobs:
             shell: bash
             run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/${{ matrix.spriggit.input_path }}" --OutputPath "modfiles/esm/${{ matrix.spriggit.output_path }}/${{ matrix.spriggit.esm_name }}.esm" --PackageName Spriggit.Yaml.Starfield
     
+    publish:
+      permissions: write-all
+      runs-on: ubuntu-latest
+      continue-on-error: true
+
+      steps: 
           - name: Delete gitkeep
             shell: bash
             run: rm ${{ github.workspace }}/modfiles/esm/.gitkeep
@@ -51,7 +57,7 @@ jobs:
             with:
               files: modfiles/
               dest: GameTweaks-${{ github.ref_name }}.zip
-                  
+        
           - name: Create Release
             id: create_release
             uses: ncipollo/release-action@v1.13.0
