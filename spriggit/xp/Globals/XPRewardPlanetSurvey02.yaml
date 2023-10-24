@@ -1,0 +1,8 @@
+FormKey: 30A8C7:Starfield.esm
+MajorRecordFlagsRaw: 64
+EditorID: XPRewardPlanetSurvey02
+StarfieldMajorRecordFlags:
+- 0x40
+Data: 400
+MajorFlags:
+- Constant

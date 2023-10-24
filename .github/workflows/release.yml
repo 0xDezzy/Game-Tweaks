@@ -1,0 +1,66 @@
+name: release-publish
+on:
+  push:
+    tags:
+        - '*.*.*'
+  workflow_dispatch:
+jobs:
+    publish:
+        permissions: write-all
+        runs-on: ubuntu-latest
+
+        strategy:
+          max-parallel: 1
+          matrix:
+            config:
+              - { input_path: 'xp',       esm_name: 'GameTweaks-XP',      output_path: 'XP'       }
+              - { input_path: 'vendors',  esm_name: 'GameTweaks-Vendors', output_path: 'Vendors'  }
+              - { input_path: 'traits',   esm_name: 'GameTweaks-Traits',  output_path: 'Traits'   }
+
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+                  
+          - name: Fetch spriggit
+            shell: bash
+            run: gh release download -O .github/spriggit.zip -p 'SpriggitLinuxCLI.zip' -R Mutagen-Modding/Spriggit ${{ inputs.spriggit_tool_version }}
+            env:
+              GH_TOKEN: ${{ github.token }}
+              
+          - name: Extract Spriggit Zip
+            shell: bash
+            run: 7z x .github/spriggit.zip -o.github/spriggit
+    
+          - name: fix spriggit permission
+            shell: bash
+            run: chmod +x .github/spriggit/Spriggit.CLI
+    
+          - name: run spriggit
+            shell: bash
+            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/${{ matrix.config.input_path }}" --OutputPath "modfiles/esm/${{ matrix.config.output_path }}/${{ matrix.config.esm_name }}.esm" --PackageName Spriggit.Yaml.Starfield
+    
+          - name: Delete gitkeep
+            shell: bash
+            run: rm ${{ github.workspace }}/modfiles/esm/.gitkeep
+    
+          - name: zip
+            uses: vimtor/action-zip@v1
+            with:
+              files: modfiles/
+              dest: GameTweaks-${{ github.ref_name }}.zip
+                  
+          - name: Create Release
+            id: create_release
+            uses: ncipollo/release-action@v1.13.0
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            with:
+              allowUpdates: false
+              name: Release ${{ github.ref_name }}
+              draft: false
+              body: Release of the version
+              prerelease: false
+              makeLatest: true
+              removeArtifacts: true
+              replacesArtifacts: true
+              artifacts: GameTweaks-${{ github.ref_name }}.zip

@@ -1,0 +1,8 @@
+FormKey: 30A8C9:Starfield.esm
+MajorRecordFlagsRaw: 64
+EditorID: XPRewardSystemSurvey01
+StarfieldMajorRecordFlags:
+- 0x40
+Data: 200
+MajorFlags:
+- Constant

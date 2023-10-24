@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingFloat
+FormKey: 000801:gametweaks-xp.esm
+EditorID: fXPStart
+Data: 200

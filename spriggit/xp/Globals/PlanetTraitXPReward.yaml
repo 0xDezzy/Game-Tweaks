@@ -1,0 +1,8 @@
+FormKey: 245AB9:Starfield.esm
+MajorRecordFlagsRaw: 64
+EditorID: PlanetTraitXPReward
+StarfieldMajorRecordFlags:
+- 0x40
+Data: 400
+MajorFlags:
+- Constant
