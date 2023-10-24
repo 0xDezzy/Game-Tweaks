@@ -9,9 +9,9 @@ jobs:
         permissions: write-all
         runs-on: ubuntu-latest
         continue-on-error: true
-        
+
         strategy:
-          max-parallel: 4
+          max-parallel: 1
           fail-fast: false
           matrix:
             spriggit:
