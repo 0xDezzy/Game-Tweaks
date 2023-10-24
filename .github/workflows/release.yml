@@ -43,9 +43,9 @@ jobs:
             run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/${{ matrix.spriggit.input_path }}" --OutputPath "modfiles/esm/${{ matrix.spriggit.output_path }}/${{ matrix.spriggit.esm_name }}.esm" --PackageName Spriggit.Yaml.Starfield
     
     publish:
+      needs: build
       permissions: write-all
       runs-on: ubuntu-latest
-      continue-on-error: true
 
       steps: 
           - name: Delete gitkeep

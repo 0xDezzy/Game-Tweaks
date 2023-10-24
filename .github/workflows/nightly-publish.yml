@@ -60,9 +60,9 @@ jobs:
 
 
   publish:
+    needs: build
     permissions: write-all
     runs-on: ubuntu-latest
-    continue-on-error: true
     
     steps:
       - name: Delete gitkeep
