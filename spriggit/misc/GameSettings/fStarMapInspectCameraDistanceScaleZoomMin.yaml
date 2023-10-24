@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingFloat
+FormKey: 000801:gametweaks-misc.esm
+EditorID: fStarMapInspectCameraDistanceScaleZoomMin
+Data: 0.235

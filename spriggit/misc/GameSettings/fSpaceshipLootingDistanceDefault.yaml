@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingFloat
+FormKey: 000800:gametweaks-misc.esm
+EditorID: fSpaceshipLootingDistanceDefault
+Data: 10000

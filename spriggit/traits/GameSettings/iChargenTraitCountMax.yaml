@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingInt
+FormKey: 000800:gametweaks-traits.esm
+EditorID: iChargenTraitCountMax
+Data: 11
