@@ -8,9 +8,11 @@ jobs:
     publish:
         permissions: write-all
         runs-on: ubuntu-latest
-
+        continue-on-error: true
+        
         strategy:
           max-parallel: 4
+          fail-fast: false
           matrix:
             spriggit:
               - { input_path: 'xp',       esm_name: 'GameTweaks-XP',      output_path: 'XP'       }
