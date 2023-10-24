@@ -10,9 +10,9 @@ jobs:
         runs-on: ubuntu-latest
 
         strategy:
-          max-parallel: 1
+          max-parallel: 3
           matrix:
-            config:
+            spriggit:
               - { input_path: 'xp',       esm_name: 'GameTweaks-XP',      output_path: 'XP'       }
               - { input_path: 'vendors',  esm_name: 'GameTweaks-Vendors', output_path: 'Vendors'  }
               - { input_path: 'traits',   esm_name: 'GameTweaks-Traits',  output_path: 'Traits'   }
@@ -37,7 +37,7 @@ jobs:
     
           - name: run spriggit
             shell: bash
-            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/${{ matrix.config.input_path }}" --OutputPath "modfiles/esm/${{ matrix.config.output_path }}/${{ matrix.config.esm_name }}.esm" --PackageName Spriggit.Yaml.Starfield
+            run: .github/spriggit/Spriggit.CLI deserialize --InputPath "spriggit/${{ matrix.spriggit.input_path }}" --OutputPath "modfiles/esm/${{ matrix.spriggit.output_path }}/${{ matrix.spriggit.esm_name }}.esm" --PackageName Spriggit.Yaml.Starfield
     
           - name: Delete gitkeep
             shell: bash
