@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingUInt
+FormKey: 1627F4:Starfield.esm
+EditorID: uPlanetContentMaxRequestsPerBlock
+Data: 20

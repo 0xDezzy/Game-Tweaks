@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingFloat
+FormKey: 2BCA26:Starfield.esm
+EditorID: fPlanetContentMaxNewWorldspacesPerScan
+Data: 1000

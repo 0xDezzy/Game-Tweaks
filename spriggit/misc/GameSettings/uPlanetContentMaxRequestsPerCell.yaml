@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingUInt
+FormKey: 000803:gametweaks-misc.esm
+EditorID: uPlanetContentMaxRequestsPerCell
+Data: 8

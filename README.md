@@ -11,6 +11,11 @@ A collection of tweaks to various parts of the game.
 * Increase the maximum Owned Spaceships to 100
 * Increase the star map zoom for planets
 * Decrease scan amount for flora and fauna to 1
+* Reduces fall damage to 0
+* Increase Scanner range and highlight distance
+* Show more points of interest in the scanner
+* Increases amount of POI's generated on when visiting planets
+* Increases the amount of POI's generated on planets on the star map. (Note: Needs to either be a new game or first time visiting a system to take effect.)
 
 
 ### Traits

@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingUInt
+FormKey: 162800:Starfield.esm
+EditorID: uPlanetContentMinRequestsPerBlock
+Data: 12

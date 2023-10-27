@@ -1,0 +1,4 @@
+MutagenObjectType: GameSettingUInt
+FormKey: 000805:gametweaks-misc.esm
+EditorID: uLandingKeepBufferSize
+Data: 9
